@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Events Listing:</h1>
-    <EventCard v-for="event in events" :key="event.id" :event="event" />
+    <h1>Events Listing: ({{ user.user.name }})</h1>
+    <EventCard v-for="event in event.events" :key="event.id" :event="event" />
 
     <!--  Pagination -->
     <template v-if="page > 1">
@@ -48,7 +48,7 @@ export default {
     lastPage() {
       return Math.ceil(this.totalEvents / this.perPage)
     },
-    ...mapState(['events'])
+    ...mapState(['event', 'user'])
   },
   methods: {
     changePage() {

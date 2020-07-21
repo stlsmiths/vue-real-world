@@ -245,6 +245,34 @@
       "date": "2020-07-16T15:30:00.000Z",
       "time": "",
       "attendees": []
+    },
+    {
+      "id": 841525,
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Han Solo"
+      },
+      "title": "aaaa",
+      "description": "aaa",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "id": 8787271,
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Han Solo"
+      },
+      "title": "adsfasdf",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
     }
   ]
 }
