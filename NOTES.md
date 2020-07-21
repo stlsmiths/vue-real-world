@@ -12,7 +12,7 @@ Vuex - designed after Flux pattern
 
 state changes hard to track / manage
 
-```
+```vuejs
 const store = new Vuex.store({
 	state: {
 
