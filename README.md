@@ -10,6 +10,13 @@ npm install
 npm run serve
 ```
 
+Github tagging
+```
+$ git tag xxxxxxx
+$ git push origin xxxxxxx 
+```
+
+
 ### Compiles and minifies for production
 ```
 npm run build
