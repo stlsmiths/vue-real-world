@@ -138,7 +138,9 @@ export default {
         activeTodosCount: (state,getters) =>
             state.todos.length - getters.doneTodos.length,
 
-        getEventById: state => id => state.events.find(evt => evt.id === id),
+        getEventById: state => id => {
+            return state.events.find(evt => evt.id === id)
+        },
         getTotalEvents: state => state.totalEvents
     }
 

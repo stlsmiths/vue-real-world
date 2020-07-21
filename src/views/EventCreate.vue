@@ -86,33 +86,7 @@
           .catch(() => {
           })
       }
-    },
-/*
-    beforeCreate() {
-      console.log('EventCreate - beforeCreate');
-    },
-    created() {
-      console.log('EventCreate - created');
-    },
-    beforeMount() {
-      console.log('EventCreate - beforeMount');
-    },
-    mounted() {
-      console.log('EventCreate - mounted');
-    },
-    beforeUpdate() {
-      console.log('EventCreate - beforeUpdate');
-    },
-    updated() {
-      console.log('EventCreate - updated');
-    },
-    beforeDestroy() {
-      console.log('EventCreate - beforeDestroy');
-    },
-    destroyed() {
-      console.log('EventCreate - destroyed');
-    },
-*/
+    }
   }
 </script>
 
