@@ -5,13 +5,15 @@ import EventService from '../services/EventService'
 
 import * as user from './modules/user.js'
 import event from './modules/event';
+import notification from "./modules/notification";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     user,
-    event
+    event,
+    notification
   },
   state: {
     categories: ['sustainability', 'nature',

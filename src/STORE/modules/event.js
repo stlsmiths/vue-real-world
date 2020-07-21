@@ -55,15 +55,29 @@ export default {
             }
         },
 
-        createEvent( { commit, rootState }, event) {
+        createEvent( { commit, dispatch, rootState }, event) {
             console.log('creating event for user ... ', rootState.user.user.name)
             EventService.postEvent(event).then( () => {
                 commit('ADD_EVENT', event)
                 commit('SET_EVENT', event)
+                const note = {
+                    type: 'success',
+                    message: 'Event was created !',
+                    content: event
+                }
+                dispatch('notification/add', note, {root: true})
+            }).catch( err => {
+                const note = {
+                    type: 'error',
+                    message: 'There was a problem creating event',
+                    content: err
+                }
+                dispatch('notification/add', note, {root: true})
+                throw err
             })
         },
 
-        fetchEvents( {commit}, {perPage, page}) {
+        fetchEvents( {commit, dispatch}, {perPage, page}) {
             EventService.getEvents(perPage, page)
                 .then(res => {
                     // console.log(res)
@@ -71,7 +85,15 @@ export default {
                     const events = res.data
                     commit('SET_EVENTS', events)
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err)
+                    const note = {
+                        type: 'error',
+                        message: 'There was a problem fetching events',
+                        content: err
+                    }
+                    dispatch('notification/add', note, {root: true})
+                })
         },
 
         fetchEvent( {commit, getters}, id) {
@@ -86,6 +108,12 @@ export default {
                     })
                     .catch( err => {
                         console.log(err)
+                        const note = {
+                            type: 'error',
+                            message: 'There was a problem fetching event id=' + id,
+                            content: err
+                        }
+                        dispatch('notification/add', note, {root: true})
                     })
             }
         },

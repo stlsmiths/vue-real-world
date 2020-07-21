@@ -4,6 +4,8 @@ https://www.vuemastery.com/courses/mastering-vuex/intro-to-vuex
 
 Vuex docs   https://vuex.vuejs.org/
 
+#### Lesson 1 - Intro
+
 state mgmt for Vue
 
 Vuex - designed after Flux pattern
@@ -38,7 +40,7 @@ this.store.dispatch(‘fetchTodos’)
 
 this.store.getters.doneTodos
 
-#### Lesson 2 - Mastering Vuex orientation**
+#### Lesson 2 - Mastering Vuex orientation
 
 https://www.vuemastery.com/courses/mastering-vuex/mastering-vuex-orientation
 
@@ -173,32 +175,22 @@ GH https://github.com/Code-Pop/real-world-vue/tree/lesson15-notifications-start
 
 white paper on memory leaks https://medium.com/outsystems-experts/beyond-memory-leaks-in-javascript-d27fd48ae67e
 
+add new notification module to store
+ * add dispatch notification/add to store fetchEvents and fetchEvent
+ * disable json-server, 
+ * check Vue console, it works ... shows eror
+ 
+created NotificationBar and NotificationContainer
+add container to App.vue
 
+I am getting a strange error on createEvent, doesn't route to new event properly or
+also get a "dispatch not found" error - like trying to find a new event without id
 
+added dispatch(notification/add) to event.js store, fetchEvents, fetchEvent, createEvent
+it displays properly
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+add a mounted() timeout timer for 5 seconds, and a beforeDestroy clearTimeout to avoid
+memory leaks
 
 
 
