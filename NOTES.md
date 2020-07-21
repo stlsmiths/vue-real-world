@@ -4,6 +4,9 @@ https://www.vuemastery.com/courses/mastering-vuex/intro-to-vuex
 
 Vuex docs   https://vuex.vuejs.org/
 
+FINAL CODE:
+[real-world-vue](https://github.com/Code-Pop/real-world-vue/blob/lesson14-modules-finish/src/store/modules/event.js)
+
 #### Lesson 1 - Intro
 
 state mgmt for Vue
@@ -191,6 +194,10 @@ it displays properly
 
 add a mounted() timeout timer for 5 seconds, and a beforeDestroy clearTimeout to avoid
 memory leaks
+
+FINAL CODE 
+https://github.com/Code-Pop/real-world-vue/blob/lesson14-modules-finish/src/store/modules/event.js
+
 
 
 
