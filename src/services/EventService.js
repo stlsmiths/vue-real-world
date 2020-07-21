@@ -18,5 +18,8 @@ export default {
   },
   postEvent( event ) {
     return apiClient.post('/events', event)
+  },
+  deleteEvent( id ) {
+    return apiClient.delete(`/events/${id}`)
   }
 }

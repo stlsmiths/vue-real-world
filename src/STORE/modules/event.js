@@ -1,6 +1,9 @@
 import EventService from '@/services/EventService'
 
+export const namespaced = true
+
 export default {
+    namespaced: true,
     state: {
         count: 0,
 
@@ -36,6 +39,9 @@ export default {
         },
         SET_EVENT(state,event) {
             state.event = {...event}
+        },
+        DROP_EVENT(state,id) {
+            state.events = state.events.filter( e => e.id !== id)
         }
     },
     actions: {
@@ -53,13 +59,14 @@ export default {
             console.log('creating event for user ... ', rootState.user.user.name)
             EventService.postEvent(event).then( () => {
                 commit('ADD_EVENT', event)
+                commit('SET_EVENT', event)
             })
         },
 
         fetchEvents( {commit}, {perPage, page}) {
             EventService.getEvents(perPage, page)
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     commit('SET_EVENTS_TOTAL', parseInt(res.headers['x-total-count']))
                     const events = res.data
                     commit('SET_EVENTS', events)
@@ -81,6 +88,20 @@ export default {
                         console.log(err)
                     })
             }
+        },
+
+        dropEvent({commit}, id) {
+            EventService.deleteEvent( id )
+                .then( resp => {
+                    console.log('delete', resp, id)
+                    commit('DROP_EVENT', id)
+                    this.$router.push({
+                        name: 'event-list'
+                    })
+                })
+                .catch( err => {
+                    console.log(err)
+                })
         }
     },
     getters: {

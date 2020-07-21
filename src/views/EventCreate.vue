@@ -52,6 +52,11 @@
         categories: this.$store.state.categories,
       }
     },
+/*
+    computed: mapState({
+      event: state => state.event.event
+    }),
+*/
     methods: {
       createFreshEvent() {
         const user = this.$store.state.user.user
@@ -70,8 +75,11 @@
       },
 
       createEvent() {
-        this.$store.dispatch('createEvent', this.event)
-          .then(() => {
+        this.$store.dispatch('event/createEvent', this.event)
+          .then((resp) => {
+
+            console.log('create event then', resp);
+
             this.$router.push({
               name: 'event-show',
               params: { id: this.event.id }
@@ -83,6 +91,7 @@
           })
       }
     },
+/*
     beforeCreate() {
       console.log('EventCreate - beforeCreate');
     },
@@ -107,6 +116,7 @@
     destroyed() {
       console.log('EventCreate - destroyed');
     },
+*/
   }
 </script>
 

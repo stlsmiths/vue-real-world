@@ -43,7 +43,7 @@ export default {
       return parseInt( this.$route.query.page) || 1
     },
     totalEvents() {
-      return this.$store.getters.getTotalEvents
+      return this.$store.getters['event/getTotalEvents']
     },
     lastPage() {
       return Math.ceil(this.totalEvents / this.perPage)
@@ -61,7 +61,7 @@ export default {
   },
   created() {
     console.log('EventCreate - created');
-    this.$store.dispatch('fetchEvents', {
+    this.$store.dispatch('event/fetchEvents', {
       perPage:  this.perPage,
       page:     this.page
     });
