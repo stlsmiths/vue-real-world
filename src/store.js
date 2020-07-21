@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import EventService from './services/EventService'
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ export default new Vuex.Store({
       'animal welfare', 'housing', 'education', 'food', 'community'
     ],
     count: 0,
+    events: [],
     todos: [
       { id: 1, text: '...', done: true },
       { id: 2, text: '...', done: false },
@@ -23,9 +25,16 @@ export default new Vuex.Store({
     },
     INCREMENT_COUNT_BY(state,value) {
       state.count += value
+    },
+    ADD_EVENT(state,event) {
+      state.events.push( event )
     }
   },
   actions: {
+    createEvent( {commit}, event) {
+      EventService.postEvent(event)
+      commit('ADD_EVENT', event)
+    },
     updateCount( { state, commit }, incrementBy) {
       if (state.user) {
         if ( incrementBy === 1) {
