@@ -2,11 +2,14 @@
 
 ## Project setup
 ```
+npm i -g @vue/cli
+npm i -g json-server
 npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
+json-server --watch db.json
 npm run serve
 ```
 

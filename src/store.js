@@ -11,7 +11,12 @@ export default new Vuex.Store({
       'animal welfare', 'housing', 'education', 'food', 'community'
     ],
     count: 0,
+
+    // Event store section
     events: [],
+    event: {},
+    totalEvents: 0,
+
     todos: [
       { id: 1, text: '...', done: true },
       { id: 2, text: '...', done: false },
@@ -26,15 +31,21 @@ export default new Vuex.Store({
     INCREMENT_COUNT_BY(state,value) {
       state.count += value
     },
+
     ADD_EVENT(state,event) {
-      state.events.push( event )
+      state.events = [ ...state.events,  event ]
+    },
+    SET_EVENTS(state,events) {
+      state.events = [...events]
+    },
+    SET_EVENTS_TOTAL(state,total) {
+      state.totalEvents = total
+    },
+    SET_EVENT(state,event) {
+      state.event = {...event}
     }
   },
   actions: {
-    createEvent( {commit}, event) {
-      EventService.postEvent(event)
-      commit('ADD_EVENT', event)
-    },
     updateCount( { state, commit }, incrementBy) {
       if (state.user) {
         if ( incrementBy === 1) {
@@ -43,13 +54,48 @@ export default new Vuex.Store({
           commit('INCREMENT_COUNT_BY', incrementBy)
         }
       }
+    },
+
+    createEvent( {commit}, event) {
+      EventService.postEvent(event)
+      commit('ADD_EVENT', event)
+    },
+
+    fetchEvents( {commit}, {perPage, page}) {
+      EventService.getEvents(perPage, page)
+          .then(res => {
+            console.log(res)
+            commit('SET_EVENTS_TOTAL', parseInt(res.headers['x-total-count']))
+            const events = res.data
+            commit('SET_EVENTS', events)
+          })
+          .catch(err => console.log(err))
+    },
+
+    fetchEvent( {commit, getters}, id) {
+      const event = getters.getEventById(id);
+
+      if (event) {
+        commit('SET_EVENT', event)
+      } else {
+        EventService.getEvent( id )
+          .then( resp => {
+            commit('SET_EVENT', resp.data)
+          })
+          .catch( err => {
+            console.log(err)
+          })
+      }
     }
   },
   getters: {
     catLength: state => state.categories.length,
     doneTodos: state => state.todos.filter( todo => todo.done ),
     activeTodosCount: (state,getters) =>
-      state.todos.length - getters.doneTodos.length
+      state.todos.length - getters.doneTodos.length,
+
+    getEventById: state => id => state.events.find(evt => evt.id === id),
+    getTotalEvents: state => state.totalEvents
   },
   modules: {}
 });
