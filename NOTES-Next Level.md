@@ -136,8 +136,24 @@ Stage final GH https://github.com/Code-Pop/real-world-vue/tree/vuelidateP2-finis
 
 #### Lesson 12 - Mixins
 
+Can add component mixins (in config, mixins:[]) or at 
+global level on Vue instance.
+
+Mixins ... data, methods, props, etc... if duplicated, the 
+component's wins.
+
+Very similar to a "base" Class which is extended.
 
 #### Lesson 13 - Filters
+
+Basically "pipes" in angular ... can have params or modifiers.
+
+defined on component config ... filters: { funcs(), func(value)  }
+
+Can also define global filters ...
+```Vue.filter('date', DateFilter)```
+
+Newer JS standards proposals may use "|" symbol in some fashion.
 
 
 FINAL GH CODE ... https://github.com/Code-Pop/real-world-vue/tree/filters_FINISH
