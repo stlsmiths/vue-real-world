@@ -14,7 +14,7 @@
         Next</router-link>
     </template>
 
-    <select name="ppg" v-model="perPage" @change="changePage">
+    <select name="ppg" v-model="perPage" @change="changePerPage">
       <option v-for="pg in pageChoices" :key="pg" :value="pg">{{ pg }}</option>
     </select>
 
@@ -51,7 +51,7 @@ export default {
     ...mapState(['event', 'user'])
   },
   methods: {
-    changePage() {
+    changePerPage() {
       this.$router.push({name:'event-list',query:{
           page: 1,
           perpage: this.perPage

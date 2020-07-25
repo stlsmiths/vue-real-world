@@ -1,8 +1,7 @@
 <template>
   <div class="user">
     <MediaBox>
-      <p slot="heading">This is {{ username }}</p>
-      <i>He is a wonderful dude!, seriously.</i>
+      <p slot="heading">Events for {{ username }}</p>
     </MediaBox>
   </div>
 </template>

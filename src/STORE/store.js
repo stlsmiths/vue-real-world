@@ -1,8 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import EventService from '../services/EventService'
-
 import * as user from './modules/user.js'
 import event from './modules/event';
 import notification from "./modules/notification";
