@@ -125,6 +125,23 @@ Video https://www.vuemastery.com/courses/next-level-vue/reusable-form-components
 #### Lesson 9 -  Reusable Form, BaseButton
 
 
+#### Lesson 10 - Form Validation with Vuelidate
+
+
+#### Lesson 11 - Form Validation with Vuelidate Pt 2
+
+
+Stage final GH https://github.com/Code-Pop/real-world-vue/tree/vuelidateP2-finish
+
+
+#### Lesson 12 - Mixins
+
+
+#### Lesson 13 - Filters
+
+
+FINAL GH CODE ... https://github.com/Code-Pop/real-world-vue/tree/filters_FINISH
+
  
 
 
