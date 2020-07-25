@@ -18,7 +18,7 @@
           <b>{{ attendee.name }}</b>
         </li>
       </ul>
-     <button @click="deleteEvent(id)">Delete</button>
+     <button @click="deleteEvent(event.id)">Delete</button>
   </div>
 </template>
 
@@ -28,7 +28,13 @@ import NProgress from 'nprogress'
 import store from '@/STORE/store'
 
 export default {
-    props: ['id'],
+  props: {
+    event: {
+      type: Object,
+      required: true
+    },
+  },
+/*
     beforeRouteEnter(routeTo, routeFrom, next){
       NProgress.start()
       store.dispatch('event/fetchEvent', routeTo.params.id)
@@ -37,13 +43,16 @@ export default {
         next()
       })
     },
+*/
     created() {
       // this.$store.dispatch('event/fetchEvent', this.id);
       // this.fetchEvent(this.id)
     },
+/*
     computed: mapState({
         event: state => state.event.event,
       }),
+*/
     methods: {
       deleteEvent: (id) => {
         console.log('delete id=', id)

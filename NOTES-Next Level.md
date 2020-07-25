@@ -1,10 +1,12 @@
-## Vue mastery class - Mastering Vuex   Jul 2020
+## NOTES Vue mastery class - Next Level Vue    Jul 2020
 
 [Vue Mastery - Next Level Vue](https://www.vuemastery.com/courses/next-level-vue/progress-bar-axios-interceptors)
 
 GH https://github.com/Code-Pop/real-world-vue/tree/progress-bar-start
 
 #### Lesson 2 - Progress Bar Axios interceptors
+
+Demonstrated on `EventList.vue` and `EventService.js` components;
 
 `npm i nprogress`
 
@@ -32,6 +34,8 @@ Interceptors are great to use;
  
  #### Lesson 3 - In-Component route guards
  
+ Demonstrate on `EventShow.vue` component ...
+ 
  Run progress and end when data returns
  Only render template when data is done.
  
@@ -57,6 +61,72 @@ EventShow.vue
 #### Lesson 4 - Global and Per-Route Guards
 
 https://www.vuemastery.com/courses/next-level-vue/progress-bar-global-and-per-route-guards
+
+May want to remove Vuex from all of our components, just use routing for data ...
+
+Two more global routing hooks
+ * router.beforeEach ... 
+ * router.afterEach ... just before component is created 
+
+Put in `router.js` beforeEach, and also per-route beforeEnter functions  
+then, consider passing the retrieved data as a "prop" 
+ * this way, we can remove all vuex calls in the component completely
+
+@7:40 time
+
+have to make changes to EventService (to return data and not promise) and 
+update EventShow, remove computed property (state.event.event)
+
+Note:  I couldn't completely remove Vuex from EventShow bc I use deleteEvent from the store
+
+#### Lesson 5 - Completing the Progress Bar
+
+https://www.vuemastery.com/courses/next-level-vue/completing-our-progress-bar
+
+Making `EventList` progress bar work okay ... 
+
+Move created ... fetchEvents into route guard
+we should probably use beforeRouteUpdate
+
+@4:35 editing `EventList`, I had added perPage as a prop, but they 
+don't in the example ...
+
+My perPage changes in EventList might not work properly.
+
+Changes to `EventCreate` ... @7:00, hmmm - mine doesn't work right
+
+#### Lesson 6 -  Error Handling
+
+404 error pages ... also Network error page
+
+Also Network-Issue code ... add timeout to axios setup.
+
+FINISH CODE https://github.com/Code-Pop/real-world-vue/tree/error-handling-finish
+
+
+
+ 
+
+
+
+
+#### Lesson 7 -  Reusable Form, BaseInput
+
+Video https://www.vuemastery.com/courses/next-level-vue/reusable-form-components-baseinput
+
+
+
+
+#### Lesson 8 -  Reusable Form, BaseSelect
+
+
+
+
+#### Lesson 9 -  Reusable Form, BaseButton
+
+
+ 
+
 
 
 

@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import NProgress from 'nprogress'
+import store from '@/STORE/store'
+
+// Components and Pages ...
 import EventList from './views/EventList.vue'
 import EventShow from './views/EventShow.vue'
 import EventCreate from './views/EventCreate.vue'
 import User from './views/User.vue'
 import NotFound from './components/NotFound.vue'
+import NetworkIssue from "./components/NetworkIssue";
 
 Vue.use(VueRouter)
 
@@ -13,7 +19,8 @@ const router = new VueRouter({
     routes: [{
             path: '/',
             name: 'event-list',
-            component: EventList
+            component: EventList,
+            props: true
         },
         {
             path: '/event/create',
@@ -24,7 +31,36 @@ const router = new VueRouter({
             path: '/event/:id',
             name: 'event-show',
             component: EventShow,
-            props: true
+            props: true,
+            beforeEnter(routeTo, routeFrom, next) {
+                //NProgress.start()
+                store.dispatch('event/fetchEvent', routeTo.params.id)
+                  .then( (event) => {
+                      routeTo.params.event = event
+                      next()
+                  }).catch( err => {
+                    console.log(err)
+                    if ( err.response && err.response.status == 404 ) {
+                        next({
+                            name: '404',
+                            params: { resource: 'event'}
+                        })
+                    } else {
+                        next({
+                          name: 'network-issue'
+                        })
+                    }
+/*
+                    const note = {
+                        type: 'error',
+                        message: 'There was a problem fetching event id=' + id,
+                        content: err
+                    }
+                    dispatch('notification/add', note, {root: true})
+*/
+                })
+
+            }
         },
         {
             path: '/user/:username',
@@ -33,10 +69,31 @@ const router = new VueRouter({
             props: true
         },
         {
+            path: '/404',
+            name: '404',
+            component: NotFound,
+            props: true
+        },
+        {
+            path: '/network-issue',
+            component: NetworkIssue,
+            props: true
+        },
+        {
             path: '*',
-            component: NotFound
+            redirect: { name: '404', params:{ resource: 'page' } }
         }
     ]
+})
+
+router.beforeEach( (routeTo,routeFrom,next) => {
+    NProgress.start()
+    next()
+})
+
+router.afterEach( () => {
+    NProgress.done()
+
 })
 
 export default router

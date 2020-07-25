@@ -37,6 +37,8 @@
 
 <script>
   import Datepicker from 'vuejs-datepicker'
+  import NProgress from 'nprogress'
+  
   export default {
     components: {
       Datepicker
@@ -58,6 +60,20 @@
     }),
 */
     methods: {
+      createEvent() {
+        NProgress.start()
+        this.$store.dispatch('event/createEvent', this.event)
+          .then((resp) => {
+            this.$router.push({
+              name: 'event-show',
+              params: { id: this.event.id }
+            })
+            this.event = this.createFreshEvent()
+          })
+          .catch(() => {
+            NProgress.done()
+          })
+      },
       createFreshEvent() {
         const user = this.$store.state.user.user
         const id = Math.floor(Math.random() * 10000000)
@@ -72,19 +88,6 @@
           time: '',
           attendees: []
         }
-      },
-
-      createEvent() {
-        this.$store.dispatch('event/createEvent', this.event)
-          .then((resp) => {
-            this.$router.push({
-              name: 'event-show',
-              params: { id: this.event.id }
-            })
-            this.event = this.createFreshEvent()
-          })
-          .catch(() => {
-          })
       }
     }
   }

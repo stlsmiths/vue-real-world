@@ -10,6 +10,7 @@ export default {
         // Event store section
         events: [],
         event: {},
+        perPage: 3,
         totalEvents: 0,
 
         todos: [
@@ -28,6 +29,9 @@ export default {
             state.count += value
         },
 
+        SET_PERPAGE(state,ppage) {
+          state.perPage = ppage
+        },
         ADD_EVENT(state,event) {
             state.events = [ ...state.events,  event ]
         },
@@ -55,6 +59,10 @@ export default {
             }
         },
 
+        setPerPage({commit,dispatch}, ppage) {
+            commit('SET_PERPAGE', ppage)
+        },
+
         createEvent( { commit, dispatch, rootState }, event) {
             console.log('creating event for user ... ', rootState.user.user.name)
             EventService.postEvent(event).then( () => {
@@ -77,8 +85,8 @@ export default {
             })
         },
 
-        fetchEvents( {commit, dispatch}, {perPage, page}) {
-            EventService.getEvents(perPage, page)
+        fetchEvents( {state, commit, dispatch}, {page}) {
+            return EventService.getEvents(state.perPage, page)
                 .then(res => {
                     // console.log(res)
                     commit('SET_EVENTS_TOTAL', parseInt(res.headers['x-total-count']))
@@ -101,28 +109,28 @@ export default {
 
             if (event) {
                 commit('SET_EVENT', event)
+                return event
             } else {
                 return EventService.getEvent( id )
                     .then( resp => {
                         commit('SET_EVENT', resp.data)
-                    })
-                    .catch( err => {
-                        console.log(err)
-                        const note = {
-                            type: 'error',
-                            message: 'There was a problem fetching event id=' + id,
-                            content: err
-                        }
-                        dispatch('notification/add', note, {root: true})
+                        return resp.data
                     })
             }
         },
 
-        dropEvent({commit}, id) {
+        dropEvent({commit,dispatch}, id) {
             EventService.deleteEvent( id )
                 .then( resp => {
                     console.log('delete', resp, id)
+                    
                     commit('DROP_EVENT', id)
+                    const note = {
+                        type: 'success',
+                        message: `Event id=${id} was deleted !`
+                    }
+                    dispatch('notification/add', note, {root: true})
+
                     this.$router.push({
                         name: 'event-list'
                     })

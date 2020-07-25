@@ -1,4 +1,4 @@
-## Vue mastery class - Mastering Vuex   Jul 2020
+## NOTES Vue mastery class - Mastering Vuex   Jul 2020
 
 https://www.vuemastery.com/courses/mastering-vuex/intro-to-vuex
 
