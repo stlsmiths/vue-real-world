@@ -29,9 +29,8 @@ const store = new Vuex.store({
 	 },
 	getters: {
 		doneTodos(state) : {
-
 	}
-});
+})
 ```
 
 mutations … modify state

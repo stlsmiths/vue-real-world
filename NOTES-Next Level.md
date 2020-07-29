@@ -2,7 +2,7 @@
 
 [Vue Mastery - Next Level Vue](https://www.vuemastery.com/courses/next-level-vue/progress-bar-axios-interceptors)
 
-GH https://github.com/Code-Pop/real-world-vue/tree/progress-bar-start
+[GH](https://github.com/Code-Pop/real-world-vue/tree/progress-bar-start)
 
 #### Lesson 2 - Progress Bar Axios interceptors
 
@@ -81,7 +81,7 @@ Note:  I couldn't completely remove Vuex from EventShow bc I use deleteEvent fro
 
 #### Lesson 5 - Completing the Progress Bar
 
-https://www.vuemastery.com/courses/next-level-vue/completing-our-progress-bar
+[video](https://www.vuemastery.com/courses/next-level-vue/completing-our-progress-bar)
 
 Making `EventList` progress bar work okay ... 
 
@@ -101,29 +101,44 @@ Changes to `EventCreate` ... @7:00, hmmm - mine doesn't work right
 
 Also Network-Issue code ... add timeout to axios setup.
 
-FINISH CODE https://github.com/Code-Pop/real-world-vue/tree/error-handling-finish
-
-
-
- 
-
-
-
+[FINISH CODE](https://github.com/Code-Pop/real-world-vue/tree/error-handling-finish)
 
 #### Lesson 7 -  Reusable Form, BaseInput
 
-Video https://www.vuemastery.com/courses/next-level-vue/reusable-form-components-baseinput
+[Video](https://www.vuemastery.com/courses/next-level-vue/reusable-form-components-baseinput)
 
+Base Form components.
 
+EventCreate has lots of elements ... lets make them base components.
 
+Note:  v-model is syntactic sugar for
+```js
+:value="vmodelName"
+@input="(val) => modelName = val"
+```
+
+Vue 2 by default applies inherited attrs to the enclosing element, i.e. the DIV in this case.
+
+To get around this ... add `inheritAtts: false` to the component definition and use `v-bind="$attrs"` on the target element.
 
 #### Lesson 8 -  Reusable Form, BaseSelect
 
+Base <select> component.
 
+Define the internal select event as `@change` and use `:selected` to assign the initial value.
 
+Note:  For options as Objects, much more complicated.  
+
+They recommend [vue-multiselect library](https://vue-multiselect.js.org/).
 
 #### Lesson 9 -  Reusable Form, BaseButton
 
+Button is basic ... uses inheritAttrs to inherit type and disabled, etc..  
+_Note: The $attrs behavior for class / style may change in Vue 3._
+
+Added `v-on="$listeners"` to pass @click, etc.. down.
+
+[Final GH](https://github.com/Code-Pop/real-world-vue/releases/tag/baseButton-finish)
 
 #### Lesson 10 - Form Validation with Vuelidate
 
@@ -131,7 +146,7 @@ Video https://www.vuemastery.com/courses/next-level-vue/reusable-form-components
 #### Lesson 11 - Form Validation with Vuelidate Pt 2
 
 
-Stage final GH https://github.com/Code-Pop/real-world-vue/tree/vuelidateP2-finish
+Stage final [GH](https://github.com/Code-Pop/real-world-vue/tree/vuelidateP2-finish)
 
 
 #### Lesson 12 - Mixins
@@ -156,7 +171,7 @@ Can also define global filters ...
 Newer JS standards proposals may use "|" symbol in some fashion.
 
 
-FINAL GH CODE ... https://github.com/Code-Pop/real-world-vue/tree/filters_FINISH
+FINAL [GH CODE](https://github.com/Code-Pop/real-world-vue/tree/filters_FINISH)
 
  
 
