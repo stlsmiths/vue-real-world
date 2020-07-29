@@ -1,18 +1,16 @@
 <template>
   <div>
     <label v-if="label">{{ label }}</label>
-    <select
-        :value="value"
-        @change="updateValue"
-        v-on="$listeners"
-        v-bind="$attrs">
+    <select :value="value"
+            @change="updateValue"
+            v-on="listeners"
+            v-bind="$attrs">
       <option
           v-for="option in options"
-          :key="option"
           :value="option"
+          :key="option"
           :selected="option === value"
-      >
-        {{option}}</option>
+      >{{ option }}</option>
     </select>
   </div>
 </template>
@@ -21,24 +19,25 @@
 export default {
   inheritAttrs: false,
   props: {
-    label: {
-      type: String,
-      default: ''
-    },
     options: {
       type: Array,
       required: true
     },
-    value: [String,Number]
+    value: [String, Number],
+    label: String
   },
-  methods: {
-    updateValue(e) {
-      this.$emit('input', e.target.value)
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.updateValue
+      }
     }
   },
+  methods: {
+    updateValue(event) {
+      this.$emit('input', event.target.value)
+    }
+  }
 }
 </script>
-
-<style scoped>
-
-</style>

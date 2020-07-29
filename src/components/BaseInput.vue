@@ -5,6 +5,7 @@
         :id="label"
         :value="value"
         v-bind="$attrs"
+        v-on="listeners"
         @input="updateValue"
     />
   </div>
@@ -16,6 +17,14 @@ export default {
   props: {
     label: [String],
     value: [String,Number]
+  },
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.updateValue
+      }
+    }
   },
   methods: {
     updateValue(e) {

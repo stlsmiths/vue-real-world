@@ -34,33 +34,19 @@ const router = new VueRouter({
             component: EventShow,
             props: true,
             beforeEnter(routeTo, routeFrom, next) {
-                //NProgress.start()
-                store.dispatch('event/fetchEvent', routeTo.params.id)
-                  .then( (event) => {
-                      routeTo.params.event = event
-                      next()
-                  }).catch( err => {
-                    console.log(err)
-                    if ( err.response && err.response.status == 404 ) {
-                        next({
-                            name: '404',
-                            params: { resource: 'event'}
-                        })
-                    } else {
-                        next({
-                          name: 'network-issue'
-                        })
-                    }
-/*
-                    const note = {
-                        type: 'error',
-                        message: 'There was a problem fetching event id=' + id,
-                        content: err
-                    }
-                    dispatch('notification/add', note, {root: true})
-*/
-                })
-
+                store
+                    .dispatch('event/fetchEvent', routeTo.params.id)
+                    .then(event => {
+                        routeTo.params.event = event
+                        next()
+                    })
+                    .catch(error => {
+                        if (error.response && error.response.status == 404) {
+                            next({ name: '404', params: { resource: 'event' } })
+                        } else {
+                            next({ name: 'network-issue' })
+                        }
+                    })
             }
         },
         {

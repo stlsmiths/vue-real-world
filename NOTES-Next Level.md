@@ -175,6 +175,8 @@ Steps to validation;
  * Use $error state to show/hide error messages
  * Style our error message 
 
+_NOTE: I was getting an error after his stated edits to `BaseSelect` where they add `$listeners` to 
+v-on.  This [GH issue](https://github.com/Code-Pop/real-world-vue/issues/18) fixes this_
 
 Stage final [GH](https://github.com/Code-Pop/real-world-vue/tree/vuelidateP2-finish)
 
