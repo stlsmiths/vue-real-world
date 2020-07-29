@@ -9,6 +9,18 @@
           class="field"
       />
 
+<!--
+      <template v-if="$v.event.category.$error">
+        <p v-if="!$v.event.category.required" class="errorMessage">Category is required.</p>
+      </template>
+-->
+
+<!--
+      <template v-if="$v.event.category.$error">
+        <p v-if="!$v.event.category.required">Please select a category!</p>
+      </template>
+-->
+
       <h3>Name & describe your event</h3>
       <BaseInput v-model="event.title"
                 label="Title"
@@ -60,17 +72,10 @@
 <script>
   import Datepicker from 'vuejs-datepicker'
   import NProgress from 'nprogress'
-  import BaseIcon from "@/components/BaseIcon";
-  import BaseInput from "@/components/BaseInput";
-  import BaseSelect from "@/components/BaseSelect";
-  import BaseButton from "@/components/BaseButton";
+  import { required } from 'vuelidate'
   
   export default {
     components: {
-      BaseSelect,
-      BaseInput,
-      BaseButton,
-      // BaseIcon,
       Datepicker
     },
     data() {
@@ -79,16 +84,23 @@
         times.push(i + ':00')
       }
       return {
-        event: this.createFreshEvent(),
         times,
         categories: this.$store.state.categories,
+        event: this.createFreshEvent()
       }
     },
-/*
-    computed: mapState({
-      event: state => state.event.event
-    }),
-*/
+
+    validations: {
+      event: {
+        category: { required },
+        title: { required },
+        description: { required },
+        location: { required },
+        date: { required },
+        time: { required }
+      }
+    },
+
     methods: {
       createEvent() {
         NProgress.start()

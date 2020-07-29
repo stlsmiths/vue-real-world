@@ -11,6 +11,7 @@ import EventCreate from './views/EventCreate.vue'
 import User from './views/User.vue'
 import NotFound from './components/NotFound.vue'
 import NetworkIssue from "./components/NetworkIssue";
+import Example from "@/views/Example";
 
 Vue.use(VueRouter)
 
@@ -68,6 +69,11 @@ const router = new VueRouter({
             component: User,
             props: true
         },
+        {
+            path: '/example',
+            component: Example
+        },
+
         {
             path: '/404',
             name: '404',

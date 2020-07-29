@@ -4,6 +4,7 @@
     <select
         :value="value"
         @change="updateValue"
+        v-on="$listeners"
         v-bind="$attrs">
       <option
           v-for="option in options"
@@ -18,6 +19,7 @@
 
 <script>
 export default {
+  inheritAttrs: false,
   props: {
     label: {
       type: String,

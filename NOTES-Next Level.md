@@ -112,7 +112,7 @@ Base Form components.
 EventCreate has lots of elements ... lets make them base components.
 
 Note:  v-model is syntactic sugar for
-```js
+```vue
 :value="vmodelName"
 @input="(val) => modelName = val"
 ```
@@ -142,12 +142,41 @@ Added `v-on="$listeners"` to pass @click, etc.. down.
 
 #### Lesson 10 - Form Validation with Vuelidate
 
+Form validation ... [Vuelidate](https://vuelidate.js.org/)  
+npm i -S vuelidate  
+add vuelidate / Vue.use in main.js.  
+
+To use in a component, add to component;  
+```
+validations: {
+    email: {
+        email, required
+    }
+}
+```
+
+Check status as;  `$v.email.$invalid` or $dirty, can use `$vm.email.$touch()` to 
+touch it.  
+
+In Vuelidate;  if `$error true, if $dirty and $invalid`  
+
+On entire component, can check `$vm.$anyDirty, $vm.$invalid, $vm.$anyError` and also
+can run `$vm.$touch()`
+
+[final gh](https://github.com/Code-Pop/real-world-vue/tree/form_validation1_finish)
 
 #### Lesson 11 - Form Validation with Vuelidate Pt 2
 
+Add vuelidation to EventCreate form. 
+
+Steps to validation;
+ * Add an error message that triggers when field is not filled in
+ * Listen to blur, which then does $touch ... and and $error we can use
+ * Use $error state to show/hide error messages
+ * Style our error message 
+
 
 Stage final [GH](https://github.com/Code-Pop/real-world-vue/tree/vuelidateP2-finish)
-
 
 #### Lesson 12 - Mixins
 
