@@ -4,19 +4,26 @@ import router from './router'
 import store from './STORE/store'
 import Vuelidate from 'vuelidate'
 
+import upperFirst from 'lodash/upperFirst'
+import camelCase from 'lodash/camelCase'
+import DateFilter from '@/filters/date'
 import 'nprogress/nprogress.css'
+
+// - CONFIGURATION
+
+Vue.filter('date', DateFilter)
+
+Vue.use(Vuelidate)
+
+Vue.config.productionTip = false
+
+//  -  BASE COMPONENTS
 
 // import BaseIcon from '@/components/BaseIcon.vue'
 // Vue.component('BaseIcon', BaseIcon)
 
 // Automatic registration of global components from;
 // https://vuejs.org/v2/guide/components-registration.html#Automatic-Global-Registration-of-Base-Components
-
-import upperFirst from 'lodash/upperFirst'
-import camelCase from 'lodash/camelCase'
-
-Vue.use(Vuelidate)
-Vue.config.productionTip = false
 
 const requireComponent = require.context(
   './components',
@@ -32,6 +39,8 @@ requireComponent.keys().forEach(fileName => {
   Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
+
+// -  VUE INSTANCE
 
 new Vue({
   router,

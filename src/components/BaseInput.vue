@@ -12,12 +12,10 @@
 </template>
 
 <script>
+import { formBaseMixin } from "@/mixins/formBaseMixin";
+
 export default {
-  inheritAttrs: false,
-  props: {
-    label: [String],
-    value: [String,Number]
-  },
+  mixins: [ formBaseMixin ],
   computed: {
     listeners() {
       return {
@@ -25,12 +23,7 @@ export default {
         input: this.updateValue
       }
     }
-  },
-  methods: {
-    updateValue(e) {
-      this.$emit('input', e.target.value)
-    }
-  },
+  }
 }
 </script>
 

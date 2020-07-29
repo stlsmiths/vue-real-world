@@ -16,15 +16,15 @@
 </template>
 
 <script>
+import { formBaseMixin } from "@/mixins/formBaseMixin";
+
 export default {
-  inheritAttrs: false,
+  mixins: [ formBaseMixin ],
   props: {
     options: {
       type: Array,
       required: true
-    },
-    value: [String, Number],
-    label: String
+    }
   },
   computed: {
     listeners() {
@@ -32,11 +32,6 @@ export default {
         ...this.$listeners,
         input: this.updateValue
       }
-    }
-  },
-  methods: {
-    updateValue(event) {
-      this.$emit('input', event.target.value)
     }
   }
 }

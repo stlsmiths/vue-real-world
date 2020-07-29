@@ -116,10 +116,15 @@ Note:  v-model is syntactic sugar for
 :value="vmodelName"
 @input="(val) => modelName = val"
 ```
-
 Vue 2 by default applies inherited attrs to the enclosing element, i.e. the DIV in this case.
 
 To get around this ... add `inheritAtts: false` to the component definition and use `v-bind="$attrs"` on the target element.
+
+Also important: In order to pass BaseXXX element events up to the parent component (i.e. `@blur`) you 
+need to define `v-on="$listeners"` (or similar) on the element to pass up.  
+
+**NOTE:**  In this class (lesson 10) they introduce a bug where "$listeners" actually needs to be
+appended with "updateValue" to make this work okay !!
 
 #### Lesson 8 -  Reusable Form, BaseSelect
 
@@ -182,24 +187,36 @@ Stage final [GH](https://github.com/Code-Pop/real-world-vue/tree/vuelidateP2-fin
 
 #### Lesson 12 - Mixins
 
-Can add component mixins (in config, mixins:[]) or at 
-global level on Vue instance.
+Can add component mixins (in config, mixins:[]) or at global level on Vue instance.
 
-Mixins ... data, methods, props, etc... if duplicated, the 
-component's wins.
+Mixins ... data, methods, props, etc... if duplicated, the component's wins.
 
-Very similar to a "base" Class which is extended.
+Very similar to a TS "base" Class which is extended.
+
+Can create an app-wide mixing as (in main.js);
+```vue
+Vue.mixin({
+  mounted() {
+    // do stuff
+  }
+})
+``` 
+
+Also can include a mixin in a component ... as `mixins: []`, the example here  
+is for `BaseInput` and `BaseSelect` to share the updateValue and props stuff.
+ 
 
 #### Lesson 13 - Filters
 
 Basically "pipes" in angular ... can have params or modifiers.
 
-defined on component config ... filters: { funcs(), func(value)  }
+Can define on component config ... filters: { funcs(), func(value)  }
 
-Can also define global filters ...
-```Vue.filter('date', DateFilter)```
+Can also define global filters ... `Vue.filter('date', DateFilter)`
 
-Newer JS standards proposals may use "|" symbol in some fashion.
+
+Argument:  Some say use a "method" or "computed" instead of a "filter", for performance reasons.
+Also Newer JS standards proposals may use "|" symbol in some fashion.
 
 
 FINAL [GH CODE](https://github.com/Code-Pop/real-world-vue/tree/filters_FINISH)
