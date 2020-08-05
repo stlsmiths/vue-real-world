@@ -128,13 +128,14 @@ appended with "updateValue" to make this work okay !!
 
 #### Lesson 8 -  Reusable Form, BaseSelect
 
-Base <select> component.
+Base `<select>` component.
 
 Define the internal select event as `@change` and use `:selected` to assign the initial value.
 
 Note:  For options as Objects, much more complicated.  
 
 They recommend [vue-multiselect library](https://vue-multiselect.js.org/).
+
 
 #### Lesson 9 -  Reusable Form, BaseButton
 
